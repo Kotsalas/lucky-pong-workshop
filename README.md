@@ -1,4 +1,3 @@
-# lucky-pong-workshop
 # Pong Workshop: Starter-Template
 
 Welcome to the **Zone01 Athens** Phaser 3 Workshop! You have the court, the paddles, and the scoreboard, but there's a problem: **The game has no ball.**
