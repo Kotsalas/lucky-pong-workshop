@@ -38,7 +38,7 @@ This version uses a **Modular Design Pattern**. Instead of one giant file, the l
 
 ---
 
-## 🛠️ Key Features
+## Key Features
 * **Circular Collisions**: The ball uses `body.setCircle` for realistic, arcade-style bounces.
 * **Event-Driven Audio**: Sound is decoupled from the physics; it triggers via a global `BALL_COLLISION` event.
 * **Pause System**: Press **ESC** to toggle `physics.world.pause()` and stop animations.
