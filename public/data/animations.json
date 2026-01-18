@@ -1,0 +1,9 @@
+[
+  {
+    "key": "tennis-ball-spin",
+    "assetKey": "tennis-ball",
+    "frameRange": { "start": 0, "end": 9 },
+    "frameRate": 18,
+    "repeat": -1
+  }
+]
