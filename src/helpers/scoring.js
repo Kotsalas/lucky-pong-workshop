@@ -1,9 +1,11 @@
+import { SCORE_WIN_CONDITION } from "../config";
+
 export class ScoringHelper {
   constructor(scene) {
     this.scene = scene;
-    this.leftScore = 0;
+    this.leftScore = 4;
     this.rightScore = 0;
-    this.winCondition = 5;
+    this.winCondition = SCORE_WIN_CONDITION;
 
     const { width } = scene.scale;
 
