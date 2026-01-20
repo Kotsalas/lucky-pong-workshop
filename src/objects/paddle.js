@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { PADDLE_HEIGHT, PADDLE_MOVE_VELOCITY, PADDLE_WIDTH } from '../config';
 
 export class Paddle extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture, isLeft) {
@@ -13,14 +14,14 @@ export class Paddle extends Phaser.Physics.Arcade.Sprite {
     this.setAngle(isLeft ? -90 : 90);
     
     // Set hitboxes (Width/Height flipped due to rotation)
-    this.body.setSize(30, 200); 
+    this.body.setSize(PADDLE_WIDTH, PADDLE_HEIGHT); 
   }
 
   update(upKey, downKey) {
     if (upKey.isDown) {
-      this.setVelocityY(-400);
+      this.setVelocityY(-PADDLE_MOVE_VELOCITY);
     } else if (downKey.isDown) {
-      this.setVelocityY(400);
+      this.setVelocityY(PADDLE_MOVE_VELOCITY);
     } else {
       this.setVelocityY(0);
     }

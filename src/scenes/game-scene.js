@@ -3,18 +3,15 @@ import { Paddle } from '../objects/paddle';
 import { Ball } from '../objects/ball';
 import { ScoringHelper } from '../helpers/scoring';
 import { AudioManager } from '../helpers/audio-manager';
+import { GameState } from '../gameState';
 
 export class GameScene extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
-    this.isPaused = false;
-    this.isGameOver = false;
   }
 
   create() {
     const { width, height } = this.scale;
-    this.isPaused = false;
-    this.isGameOver = false;
     this.add.image(width / 2, height / 2, 'basic-game-background');
 
     // Initialize the Audio Manager
@@ -57,7 +54,7 @@ export class GameScene extends Phaser.Scene {
     this.pauseText = this.add.text(width / 2, height / 2, 'PAUSED', {
       fontSize: '64px',
       fill: '#fff'
-    }).setOrigin(0.5).setVisible(false).setDepth(20);
+    }).setOrigin(0.5).setVisible(false).setDepth(5);
 
     // Create Restart Menu
     this.createRestartMenu(width, height);
@@ -87,11 +84,11 @@ export class GameScene extends Phaser.Scene {
 
   update() {
     // 1. Check for Pause Toggle (JustDown ensures it only triggers once per press)
-    if (Phaser.Input.Keyboard.JustDown(this.escKey) && !this.isGameOver) {
+    if (Phaser.Input.Keyboard.JustDown(this.escKey) && !GameState.isGameOver) {
       this.togglePause();
     }
 
-    if (this.isPaused || this.isGameOver) return;
+    if (GameState.isPaused || GameState.isGameOver) return;
 
     // Delegate movement to the objects
     this.leftPaddle.update(this.wasd.up, this.wasd.down);
@@ -108,9 +105,9 @@ export class GameScene extends Phaser.Scene {
   }
 
   togglePause() {
-    this.isPaused = !this.isPaused;
+    GameState.isPaused = !GameState.isPaused;
 
-    if (this.isPaused) {
+    if (GameState.isPaused) {
       this.physics.world.pause();
       this.anims.pauseAll(); // Stops the ball spinning
       this.pauseText.setVisible(true);
@@ -132,14 +129,14 @@ export class GameScene extends Phaser.Scene {
   }
 
   showGameOver() {
-    this.isPaused = true;
+    GameState.isGameOver = true;
     this.physics.world.pause(); 
     this.overlay.setVisible(true);
     this.restartButton.setVisible(true);
   }
 
   restartGame() {
-    this.isPaused = false;
+    GameState.isGameOver = false;
     this.physics.world.resume();
     this.scoring.resetMatch();
     this.overlay.setVisible(false);

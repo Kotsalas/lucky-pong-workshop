@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { BALL_OFFSET, BALL_RADIUS, BALL_VELOCITY } from '../config';
 
 export class Ball extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, texture) {
@@ -6,7 +7,7 @@ export class Ball extends Phaser.Physics.Arcade.Sprite {
     
     scene.add.existing(this);
     scene.physics.add.existing(this);
-    this.body.setCircle(14, 2, 2);
+    this.body.setCircle(BALL_RADIUS, BALL_OFFSET, BALL_OFFSET);
 
     this.setBounce(1, 1);
     this.setCollideWorldBounds(true);
@@ -20,7 +21,7 @@ export class Ball extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.time.delayedCall(1000, () => {
       const xVel = Math.random() > 0.5 ? 350 : -350;
-      const yVel = Phaser.Math.Between(-150, 150);
+      const yVel = Phaser.Math.Between(-BALL_VELOCITY, BALL_VELOCITY);
       this.setVelocity(xVel, yVel);
     });
   }
