@@ -5,7 +5,6 @@ export class ScoringHelper {
     this.scene = scene;
     this.leftScore = 4;
     this.rightScore = 0;
-    this.winCondition = SCORE_WIN_CONDITION;
 
     const { width } = scene.scale;
 
@@ -21,7 +20,7 @@ export class ScoringHelper {
     this.updateDisplay();
 
     // Check for game reset
-    if (this.leftScore >= this.winCondition || this.rightScore >= this.winCondition) {
+    if (this.leftScore >= SCORE_WIN_CONDITION || this.rightScore >= SCORE_WIN_CONDITION) {
       this.resetMatch();
       // Emit a custom event name 'GAME_OVER' and pass the winner side
       this.scene.events.emit('GAME_OVER', side);
